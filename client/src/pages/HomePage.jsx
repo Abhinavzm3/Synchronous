@@ -87,12 +87,12 @@ const HomePage = () => {
       <div className="relative z-10 w-full max-w-4xl p-6">
         <div className="text-center mb-10">
           <motion.div 
-            className="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-orange-500 p-4 rounded-full mb-4 shadow-lg"
+            className="inline-flex items-center justify-center p-4 rounded-full mb-4 shadow-lg"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
           >
-            <FaPlayCircle className="text-white text-4xl" />
-          </motion.div>
+<img src='/ChatGPT_Image_Jun_28__2025__03_01_55_PM-removebg-preview.png' alt='akm' 
+              className='w-32'/>          </motion.div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-2">
             <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
               Synchronous

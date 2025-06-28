@@ -363,8 +363,10 @@ const RoomPage = () => {
       >
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
-            <div className="bg-gradient-to-r from-amber-500 to-orange-500 p-2 rounded-xl mr-3 shadow-md">
-              <FaUsers className="text-white" size={20} />
+            <div className="  mr-1 ">
+              <img src='/ChatGPT_Image_Jun_28__2025__03_01_55_PM-removebg-preview.png' alt='akm' 
+              className='w-24'/>
+             
             </div>
             <div>
               <h1 className="text-xl md:text-2xl font-bold truncate max-w-[120px] md:max-w-xs">
@@ -455,8 +457,8 @@ const RoomPage = () => {
                 transition={{ duration: 4, repeat: Infinity }}
               >
                 <div className="text-amber-400 text-center">
-                  <div className="text-5xl mb-2">♪</div>
-                  <p className="text-sm">No song playing</p>
+                  <div className="text-5xl mb-2"><img src='/ChatGPT_Image_Jun_28__2025__03_01_55_PM-removebg-preview.png' alt='akm' 
+              className='w-38'/></div>
                 </div>
               </motion.div>
             )}
@@ -690,4 +692,125 @@ const RoomPage = () => {
 
         {/* Sync Status Card */}
         <motion.div 
-    
+          className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-amber-100 shadow-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <motion.div 
+              className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100 shadow-sm"
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex items-center">
+                <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-3 rounded-lg mr-4">
+                  <FaSyncAlt className="text-amber-600" />
+                </div>
+                <div>
+                  <h4 className="text-sm text-gray-600">Sync Status</h4>
+                  <p className={`text-lg font-bold ${syncError > 1 ? 'text-amber-600' : 'text-emerald-600'}`}>
+                    {syncError > 1 ? 'Adjusting' : 'In Sync'}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100 shadow-sm"
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex items-center">
+                <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-3 rounded-lg mr-4">
+                  <FaUsers className="text-amber-600" />
+                </div>
+                <div>
+                  <h4 className="text-sm text-gray-600">Listeners</h4>
+                  <p className="text-lg font-bold text-gray-800">{users.length}</p>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100 shadow-sm"
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex items-center">
+                <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-3 rounded-lg mr-4">
+                  <FaVolumeUp className="text-amber-600" />
+                </div>
+                <div>
+                  <h4 className="text-sm text-gray-600">Volume</h4>
+                  <p className="text-lg font-bold text-gray-800">{volume}%</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </main>
+
+      {/* Footer */}
+      <footer className="mt-8 py-6 text-center text-gray-600 text-sm">
+        <div className="container mx-auto">
+          <p className="flex items-center justify-center">
+            <FaMusic className="mr-2 text-amber-500" />
+            Collaborative Music Room • All devices synchronized
+          </p>
+          <p className="mt-2">Room ID: {roomId}</p>
+        </div>
+      </footer>
+
+      {/* Animation keyframes */}
+      <style jsx>{`
+        @keyframes float {
+          0% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+          100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes float-delay {
+          0% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(-5deg); }
+          100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .animate-float {
+          animation: float 8s ease-in-out infinite;
+        }
+        
+        .animate-float-delay {
+          animation: float-delay 10s ease-in-out infinite;
+          animation-delay: 2s;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(253, 230, 138, 0.3);
+          border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(245, 158, 11, 0.5);
+          border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(245, 158, 11, 0.7);
+        }
+        
+        @keyframes progress {
+          from { width: 0; }
+          to { width: 100%; }
+        }
+        
+        .animate-progress {
+          animation: progress 2s linear forwards;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default RoomPage;
