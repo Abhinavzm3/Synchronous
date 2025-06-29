@@ -3,9 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSocket } from '../context/SocketContext';
 import ReactPlayer from 'react-player/youtube';
 import axios from 'axios';
-import { FaYoutube, FaPlay, FaPause, FaUsers, FaVolumeUp, FaSyncAlt, FaSearch, FaMusic } from 'react-icons/fa';
-import { MdClose, MdQueueMusic } from 'react-icons/md';
-import { motion } from 'framer-motion';
+import { FaYoutube, FaPlay, FaPause, FaUsers, FaVolumeUp, FaSyncAlt, FaSearch } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
 
 const RoomPage = () => {
   const { roomId } = useParams();
@@ -315,16 +314,16 @@ const RoomPage = () => {
 
   if (roomError) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-100 via-orange-50 to-yellow-100 p-4">
-        <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl text-center max-w-md border border-amber-200">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 to-purple-800 p-4">
+        <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-xl text-center max-w-md border border-white/20">
           <div className="bg-red-500 text-white p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <MdClose size={32} />
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Room Error</h2>
-          <p className="text-red-500 text-lg mb-6">{roomError}</p>
-          <p className="text-gray-600 mb-6">Redirecting to home page...</p>
-          <div className="h-2 w-full bg-amber-100 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full animate-progress"></div>
+          <h2 className="text-2xl font-bold text-white mb-4">Room Error</h2>
+          <p className="text-red-300 text-lg mb-6">{roomError}</p>
+          <p className="text-white/80 mb-6">Redirecting to home page...</p>
+          <div className="h-2 w-full bg-white/20 rounded-full overflow-hidden">
+            <div className="h-full bg-white rounded-full animate-progress"></div>
           </div>
         </div>
       </div>
@@ -332,47 +331,19 @@ const RoomPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100 text-gray-800 overflow-hidden relative">
-      {/* Floating decorative elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-amber-200/30 to-orange-200/30 blur-xl animate-float"></div>
-      <div className="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-gradient-to-r from-teal-200/30 to-emerald-200/30 blur-xl animate-float-delay"></div>
-      <div className="absolute bottom-1/4 left-1/3 w-28 h-28 rounded-full bg-gradient-to-r from-rose-200/30 to-pink-200/30 blur-xl animate-float"></div>
-      
-      {/* Floating music notes */}
-      <motion.div 
-        className="absolute top-1/4 left-1/4"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <FaMusic className="text-amber-400/40 text-4xl" />
-      </motion.div>
-      <motion.div 
-        className="absolute top-1/3 right-1/3"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-      >
-        <FaMusic className="text-teal-400/40 text-5xl" />
-      </motion.div>
-
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
       {/* Header */}
-      <motion.header 
-        className="bg-white/80 backdrop-blur-sm p-4 shadow-md rounded-b-xl"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 120 }}
-      >
+      <header className="bg-gradient-to-r from-indigo-700 to-purple-700 p-4 shadow-lg backdrop-blur-sm">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
-            <div className="  mr-1 ">
-              <img src='/ChatGPT_Image_Jun_28__2025__03_01_55_PM-removebg-preview.png' alt='akm' 
-              className='w-24'/>
-             
+            <div className="bg-indigo-600 p-2 rounded-lg mr-3">
+              <FaUsers size={20} />
             </div>
             <div>
               <h1 className="text-xl md:text-2xl font-bold truncate max-w-[120px] md:max-w-xs">
                 {roomInfo?.name || 'Music Room'}
               </h1>
-              <div className="text-xs text-amber-600 flex items-center">
+              <div className="text-xs text-indigo-200 flex items-center">
                 Room ID: {roomId}
               </div>
             </div>
@@ -383,65 +354,54 @@ const RoomPage = () => {
               className="relative group"
               onClick={() => setShowUserList(!showUserList)}
             >
-              <div className="bg-gradient-to-r from-amber-500 to-orange-500 p-2 rounded-xl cursor-pointer shadow-md hover:shadow-lg transition">
-                <div className="flex items-center text-white">
+              <div className="bg-indigo-600 p-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition">
+                <div className="flex items-center">
                   <span className="mr-2">{users.length}</span>
                   <FaUsers />
                 </div>
               </div>
               
               {showUserList && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl z-10 border border-amber-100">
-                  <div className="p-3 font-medium text-sm border-b border-amber-100 bg-amber-50 rounded-t-xl">Users in Room</div>
+                <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl z-10 border border-gray-700">
+                  <div className="p-3 font-medium text-sm border-b border-gray-700">Users in Room</div>
                   <div className="max-h-60 overflow-y-auto">
                     {users.map((user, index) => (
-                      <motion.div 
-                        key={index}
-                        className="p-3 flex items-center hover:bg-amber-50 transition"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <div className="bg-gradient-to-r from-amber-400 to-orange-400 w-8 h-8 rounded-full flex items-center justify-center mr-2 text-white">
+                      <div key={index} className="p-3 flex items-center hover:bg-gray-700/50">
+                        <div className="bg-indigo-500 w-8 h-8 rounded-full flex items-center justify-center mr-2">
                           <span className="text-sm">U{index+1}</span>
                         </div>
                         <span className="truncate">{user}</span>
                         {isAdmin && user === socket.id && (
-                          <span className="ml-auto bg-amber-500 text-white text-xs px-2 py-1 rounded-full">Admin</span>
+                          <span className="ml-auto bg-yellow-500 text-black text-xs px-2 py-1 rounded">Admin</span>
                         )}
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
               )}
             </div>
             
-            <div className="bg-gradient-to-r from-teal-400 to-emerald-400 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
-              <FaSyncAlt className="inline mr-1" />
+            <div className="bg-gray-800/50 p-2 rounded-lg flex items-center text-sm">
+              <FaSyncAlt className="mr-1 text-green-400" />
               <span>{syncError.toFixed(1)}s</span>
             </div>
             
             {isAdmin && (
-              <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
+              <div className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-medium">
                 Admin
               </div>
             )}
           </div>
         </div>
-      </motion.header>
+      </header>
 
       <main className="container mx-auto p-4 max-w-4xl">
         {/* Now Playing Section */}
-        <motion.div 
-          className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-amber-100 shadow-lg overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-gray-700/50 shadow-xl overflow-hidden">
           <div className="flex flex-col md:flex-row">
             {roomInfo?.currentSong?.artwork ? (
               <div className="mb-4 md:mb-0 md:mr-6 flex-shrink-0">
-                <div className="rounded-xl w-full aspect-square max-w-[200px] overflow-hidden shadow-lg border-2 border-amber-100">
+                <div className="bg-gray-700/30 border-2 border-dashed border-gray-600/50 rounded-xl w-full aspect-square max-w-[200px] overflow-hidden">
                   <img 
                     src={roomInfo.currentSong.artwork} 
                     alt="Album cover" 
@@ -451,24 +411,20 @@ const RoomPage = () => {
                 </div>
               </div>
             ) : (
-              <motion.div 
-                className="bg-gradient-to-r from-amber-100 to-orange-100 border-2 border-dashed border-amber-200 rounded-xl w-full aspect-square max-w-[200px] flex items-center justify-center mb-4 md:mb-0 md:mr-6"
-                animate={{ rotate: [0, 2, -2, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-              >
-                <div className="text-amber-400 text-center">
-                  <div className="text-5xl mb-2"><img src='/ChatGPT_Image_Jun_28__2025__03_01_55_PM-removebg-preview.png' alt='akm' 
-              className='w-38'/></div>
+              <div className="bg-gray-700/30 border-2 border-dashed border-gray-600/50 rounded-xl w-full aspect-square max-w-[200px] flex items-center justify-center mb-4 md:mb-0 md:mr-6">
+                <div className="text-gray-500 text-center">
+                  <div className="text-5xl mb-2">♪</div>
+                  <p className="text-sm">No song playing</p>
                 </div>
-              </motion.div>
+              </div>
             )}
             
             <div className="flex-1">
               <div className="mb-4">
-                <h2 className="text-2xl font-bold mb-1 truncate text-gray-800">
+                <h2 className="text-2xl font-bold mb-1 truncate">
                   {roomInfo?.currentSong?.title || 'Select a song to play'}
                 </h2>
-                <p className="text-orange-600 truncate">
+                <p className="text-purple-300 truncate">
                   {roomInfo?.currentSong?.artist || 'Music Room'}
                 </p>
               </div>
@@ -476,34 +432,32 @@ const RoomPage = () => {
               {/* Player */}
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <motion.button
+                  <button
                     onClick={handlePlay}
                     disabled={!isAdmin || playback.isPlaying || !roomInfo?.currentSong}
-                    className={`p-3 rounded-full shadow-md ${
+                    className={`p-3 rounded-full shadow-lg ${
                       playback.isPlaying || !isAdmin || !roomInfo?.currentSong
-                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                        : 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:shadow-lg'
-                    } transition-all duration-300`}
-                    whileHover={{ scale: !playback.isPlaying && isAdmin && roomInfo?.currentSong ? 1.1 : 1 }}
+                        ? 'bg-gray-700 text-gray-500 cursor-not-allowed' 
+                        : 'bg-green-600 text-white hover:bg-green-700'
+                    } transition-all duration-300 transform hover:scale-105`}
                   >
                     <FaPlay />
-                  </motion.button>
+                  </button>
                   
-                  <motion.button
+                  <button
                     onClick={handlePause}
                     disabled={!isAdmin || !playback.isPlaying}
-                    className={`p-3 rounded-full shadow-md ${
+                    className={`p-3 rounded-full shadow-lg ${
                       !playback.isPlaying || !isAdmin
-                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                        : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:shadow-lg'
-                    } transition-all duration-300`}
-                    whileHover={{ scale: playback.isPlaying && isAdmin ? 1.1 : 1 }}
+                        ? 'bg-gray-700 text-gray-500 cursor-not-allowed' 
+                        : 'bg-yellow-600 text-white hover:bg-yellow-700'
+                    } transition-all duration-300 transform hover:scale-105`}
                   >
                     <FaPause />
-                  </motion.button>
+                  </button>
                   
                   <div className="flex-1">
-                    <div className="flex justify-between text-xs text-gray-500 mb-1">
+                    <div className="flex justify-between text-xs text-gray-400 mb-1">
                       <span>{formatTime(currentTime)}</span>
                       <span>
                         {playerRef.current ? 
@@ -519,27 +473,27 @@ const RoomPage = () => {
                       onChange={(e) => setCurrentTime(parseFloat(e.target.value))}
                       onMouseUp={() => handleSeek(currentTime)}
                       onTouchEnd={() => handleSeek(currentTime)}
-                      className="w-full h-2 bg-amber-100 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                      className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
                       disabled={!isAdmin}
                     />
                   </div>
                 </div>
                 
                 <div className="flex items-center space-x-3">
-                  <FaVolumeUp className="text-amber-500" />
+                  <FaVolumeUp className="text-gray-400" />
                   <input
                     type="range"
                     min={0}
                     max={100}
                     value={volume}
                     onChange={handleVolumeChange}
-                    className="w-full h-2 bg-amber-100 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-indigo-500"
                   />
                 </div>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Hidden player for audio control */}
         <div className="hidden">
@@ -580,18 +534,13 @@ const RoomPage = () => {
 
         {/* Search Section for Admin */}
         {isAdmin && (
-          <motion.div 
-            className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-amber-100 shadow-lg mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
+          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 shadow-xl">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-gray-800 flex items-center">
-                <FaSearch className="mr-2 text-amber-500" />
+              <h2 className="text-xl font-bold flex items-center">
+                <FaSearch className="mr-2 text-indigo-400" />
                 Search Songs
               </h2>
-              <div className="flex items-center bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1 rounded-full text-sm shadow-md">
+              <div className="flex items-center bg-red-600/20 px-3 py-1 rounded-full text-sm">
                 <FaYoutube className="mr-1" />
                 <span>YouTube</span>
               </div>
@@ -604,46 +553,44 @@ const RoomPage = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && performSearch()}
-                className="flex-grow bg-amber-50 border border-amber-200 text-gray-800 px-4 py-3 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent shadow-inner"
+                className="flex-grow bg-gray-700/50 border border-gray-600/50 text-white px-4 py-3 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               />
-              <motion.button
+              <button
                 onClick={performSearch}
                 disabled={isSearching || !searchQuery.trim()}
-                className={`bg-gradient-to-r from-amber-500 to-orange-500 text-white px-5 rounded-r-lg transition flex items-center justify-center shadow-md ${
-                  isSearching || !searchQuery.trim() ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-lg'
-                }`}
-                whileHover={{ scale: !isSearching && searchQuery.trim() ? 1.05 : 1 }}
+                className={`bg-indigo-600 text-white px-5 rounded-r-lg transition ${
+                  isSearching || !searchQuery.trim() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'
+                } flex items-center justify-center`}
               >
                 {isSearching ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                 ) : (
                   'Search'
                 )}
-              </motion.button>
+              </button>
             </div>
             
             {searchError && (
-              <div className="bg-red-100 p-3 rounded-lg mb-4 text-red-600 text-center border border-red-200">
+              <div className="bg-red-900/30 border border-red-700/50 text-red-300 p-3 rounded-lg mb-4 text-center">
                 {searchError}
               </div>
             )}
             
             {isSearching ? (
               <div className="flex justify-center py-6">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
               </div>
             ) : searchResults.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
                 {searchResults.map((song) => (
-                  <motion.div 
+                  <div 
                     key={song.id} 
-                    className="bg-gradient-to-br from-amber-50 to-orange-50 hover:bg-amber-100 backdrop-blur-sm border border-amber-200 rounded-xl p-4 cursor-pointer transition-all duration-300"
+                    className="bg-gray-700/30 hover:bg-indigo-900/20 backdrop-blur-sm border border-gray-600/50 rounded-xl p-4 cursor-pointer transition-all duration-300 transform hover:scale-[1.02]"
                     onClick={() => handleSelectSong(song)}
-                    whileHover={{ scale: 1.02 }}
                   >
                     <div className="flex">
                       {song.artwork ? (
-                        <div className="w-16 h-16 rounded-lg overflow-hidden mr-4 flex-shrink-0 border border-amber-200">
+                        <div className="w-16 h-16 rounded-lg overflow-hidden mr-4 flex-shrink-0">
                           <img 
                             src={song.artwork} 
                             alt="Album cover" 
@@ -651,153 +598,113 @@ const RoomPage = () => {
                           />
                         </div>
                       ) : (
-                        <div className="bg-gradient-to-r from-amber-100 to-orange-100 border-2 border-dashed border-amber-200 rounded-lg w-16 h-16 mr-4 flex items-center justify-center">
-                          <div className="text-3xl text-amber-400">♪</div>
+                        <div className="bg-gray-600/30 border-2 border-dashed border-gray-500/50 rounded-lg w-16 h-16 mr-4 flex items-center justify-center">
+                          <div className="text-3xl">♪</div>
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
-                        <h3 className="font-bold truncate text-gray-800">{song.title}</h3>
-                        <p className="text-sm text-orange-600 truncate">{song.artist}</p>
+                        <h3 className="font-bold truncate">{song.title}</h3>
+                        <p className="text-sm text-purple-300 truncate">{song.artist}</p>
                         <div className="mt-2">
-                          <span className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-700 text-xs px-2 py-1 rounded">
+                          <span className="bg-indigo-600/30 text-indigo-300 text-xs px-2 py-1 rounded">
                             Select
                           </span>
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             ) : searchQuery && !isSearching ? (
               <div className="text-center py-8">
-                <div className="inline-block bg-gradient-to-r from-amber-200 to-orange-200 p-4 rounded-full mb-4">
-                  <FaSearch className="text-amber-600 text-3xl" />
-                </div>
-                <p className="text-gray-600">No results found</p>
+                <div className="text-5xl mb-4">🔍</div>
+                <p className="text-gray-400">No results found</p>
                 <p className="text-gray-500 text-sm mt-2">Try different keywords</p>
               </div>
             ) : (
               <div className="text-center py-8">
-                <div className="inline-block bg-gradient-to-r from-amber-200 to-orange-200 p-4 rounded-full mb-4">
-                  <FaYoutube className="text-amber-600 text-3xl" />
+                <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 p-4 rounded-full mb-4">
+                  <FaYoutube size={32} />
                 </div>
-                <h3 className="text-xl font-medium mb-2 text-gray-800">Search for music</h3>
-                <p className="text-gray-600 max-w-md mx-auto">
+                <h3 className="text-xl font-medium mb-2">Search for music</h3>
+                <p className="text-gray-400 max-w-md mx-auto">
                   Use the search bar above to find songs on YouTube. Select a song to play it in the room for everyone.
                 </p>
               </div>
             )}
-          </motion.div>
+          </div>
         )}
 
         {/* Sync Status Card */}
-        <motion.div 
-          className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-amber-100 shadow-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-5 mt-6 border border-gray-700/50 shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <motion.div 
-              className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100 shadow-sm"
-              whileHover={{ y: -5 }}
-            >
+            <div className="bg-gray-700/30 p-4 rounded-xl border border-gray-600/50">
               <div className="flex items-center">
-                <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-3 rounded-lg mr-4">
-                  <FaSyncAlt className="text-amber-600" />
+                <div className="bg-indigo-600/20 p-3 rounded-lg mr-4">
+                  <FaSyncAlt className="text-indigo-400" />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-600">Sync Status</h4>
-                  <p className={`text-lg font-bold ${syncError > 1 ? 'text-amber-600' : 'text-emerald-600'}`}>
+                  <h4 className="text-sm text-gray-400">Sync Status</h4>
+                  <p className={`text-lg font-bold ${syncError > 1 ? 'text-yellow-400' : 'text-green-400'}`}>
                     {syncError > 1 ? 'Adjusting' : 'In Sync'}
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
             
-            <motion.div 
-              className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100 shadow-sm"
-              whileHover={{ y: -5 }}
-            >
+            <div className="bg-gray-700/30 p-4 rounded-xl border border-gray-600/50">
               <div className="flex items-center">
-                <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-3 rounded-lg mr-4">
-                  <FaUsers className="text-amber-600" />
+                <div className="bg-purple-600/20 p-3 rounded-lg mr-4">
+                  <FaUsers className="text-purple-400" />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-600">Listeners</h4>
-                  <p className="text-lg font-bold text-gray-800">{users.length}</p>
+                  <h4 className="text-sm text-gray-400">Listeners</h4>
+                  <p className="text-lg font-bold text-white">{users.length}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
             
-            <motion.div 
-              className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100 shadow-sm"
-              whileHover={{ y: -5 }}
-            >
+            <div className="bg-gray-700/30 p-4 rounded-xl border border-gray-600/50">
               <div className="flex items-center">
-                <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-3 rounded-lg mr-4">
-                  <FaVolumeUp className="text-amber-600" />
+                <div className="bg-green-600/20 p-3 rounded-lg mr-4">
+                  <FaVolumeUp className="text-green-400" />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-600">Volume</h4>
-                  <p className="text-lg font-bold text-gray-800">{volume}%</p>
+                  <h4 className="text-sm text-gray-400">Volume</h4>
+                  <p className="text-lg font-bold text-white">{volume}%</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </main>
 
       {/* Footer */}
-      <footer className="mt-8 py-6 text-center text-gray-600 text-sm">
+      <footer className="mt-8 py-6 text-center text-gray-500 text-sm">
         <div className="container mx-auto">
-          <p className="flex items-center justify-center">
-            <FaMusic className="mr-2 text-amber-500" />
-            Collaborative Music Room • All devices synchronized
-          </p>
+          <p>Collaborative Music Room • All devices synchronized</p>
           <p className="mt-2">Room ID: {roomId}</p>
         </div>
       </footer>
 
-      {/* Animation keyframes */}
+      {/* Custom Scrollbar Style */}
       <style jsx>{`
-        @keyframes float {
-          0% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(5deg); }
-          100% { transform: translateY(0) rotate(0deg); }
-        }
-        
-        @keyframes float-delay {
-          0% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-15px) rotate(-5deg); }
-          100% { transform: translateY(0) rotate(0deg); }
-        }
-        
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-        
-        .animate-float-delay {
-          animation: float-delay 10s ease-in-out infinite;
-          animation-delay: 2s;
-        }
-        
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
         }
         
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(253, 230, 138, 0.3);
+          background: rgba(55, 65, 81, 0.3);
           border-radius: 10px;
         }
         
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(245, 158, 11, 0.5);
+          background: rgba(139, 92, 246, 0.5);
           border-radius: 10px;
         }
         
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(245, 158, 11, 0.7);
+          background: rgba(139, 92, 246, 0.7);
         }
         
         @keyframes progress {

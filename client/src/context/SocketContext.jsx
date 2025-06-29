@@ -7,7 +7,7 @@ export const useSocket = () => useContext(SocketContext);
 
 export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
-
+//https://synchronous-lesl.onrender.com/
   useEffect(() => {
     const newSocket = io('https://synchronous-lesl.onrender.com/', {
       reconnection: true,
