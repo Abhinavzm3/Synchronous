@@ -9,7 +9,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('https://synchronous-3yhu.vercel.app/', {
+    const newSocket = io('https://synchronous-lesl.onrender.com/', {
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,

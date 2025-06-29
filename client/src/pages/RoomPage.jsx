@@ -233,7 +233,7 @@ const RoomPage = () => {
     setIsSearching(true);
     
     try {
-      const response = await axios.get(`https://synchronous-3yhu.vercel.app/api/search?q=${encodeURIComponent(searchQuery)}`);
+      const response = await axios.get(`https://synchronous-lesl.onrender.com/api/search?q=${encodeURIComponent(searchQuery)}`);
       const results = Array.isArray(response.data) ? response.data : [];
       setSearchResults(results);
       
