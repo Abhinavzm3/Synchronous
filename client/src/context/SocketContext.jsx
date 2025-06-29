@@ -9,7 +9,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('http://192.168.163.241:5000', {
+    const newSocket = io('https://synchronous-3yhu.vercel.app/', {
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
